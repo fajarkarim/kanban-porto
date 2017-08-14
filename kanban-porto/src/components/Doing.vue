@@ -2,20 +2,24 @@
   <div class="col-3">
     <div class="card">
       <div class="card-header">
-        Doing
+        Todo
       </div>
       <div class="card-block">
-        <div class="card">
+        <div v-for="task in doing" class="card mb-3">
           <div class="card-block">
-            <h4 class="card-title">title</h4>
+            <p class="card-title"><strong>{{ task.title }}</strong></p>
+            <p class="card-text">Point: {{ task.point }}</p>
           </div>
           <div class="card-footer">
             <div class="row">
-              <a class="col" href="#">Edit</a>
-              <a class="col" href="#">Details</a>
-              <a class="col" href="#">Done</a>
+              <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'edit'">Edit</a>
+              <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'details'">Details</a>
+              <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'auth'">Doing</a>
             </div>
           </div>
+          <DetailTaskModal :id="task['.key']+'details'" :taskDescription="task.description" :taskTitle="task.title"/>
+          <EditTaskModal :id="task['.key']+'edit'" :task="task"/>
+          <AuthModal :id="task['.key']+'auth'" :task="task"/>
         </div>
       </div>
     </div>
@@ -23,8 +27,26 @@
 </template>
 
 <script>
+import DetailTaskModal from '@/components/DetailTaskModal'
+import EditTaskModal from '@/components/EditTaskModal'
+import AuthModal from '@/components/AuthModal'
 export default {
-  name: 'Doing'
+  name: 'Todo',
+  components: {
+    DetailTaskModal,
+    EditTaskModal,
+    AuthModal
+  },
+  firebase () {
+    return {
+      tasks: this.$db.ref('kanban')
+    }
+  },
+  computed: {
+    doing () {
+      return this.tasks.filter(task => task['status'] === 2)
+    }
+  }
 }
 </script>
 

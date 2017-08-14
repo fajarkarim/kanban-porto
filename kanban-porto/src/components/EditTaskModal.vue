@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="modal fade" id="editTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" abindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,19 +12,19 @@
           <form>
             <div class="form-group">
               <label for="title">Title:</label>
-              <input v-model="taskTitle" class="form-control" type="text">
+              <input v-model="title" class="form-control" type="text">
             </div>
             <div class="form-group">
               <label for="title">Description:</label>
-              <textarea v-model="taskDescription" class="form-control" type="text" rows="5"></textarea>
+              <textarea v-model="description" class="form-control" type="text" rows="5"></textarea>
             </div>
             <div class="form-group">
               <label for="title">Assignee:</label>
-              <input v-model="taskAssignee" class="form-control" type="text">
+              <input v-model="assignee" class="form-control" type="text">
             </div>
             <div class="form-group">
               <label for="title">Point:</label>
-              <input v-model="taskPoint" class="form-control" type="text">
+              <input v-model="point" class="form-control" type="text">
             </div>
           </form>
         </div>
@@ -40,13 +40,24 @@
 <script>
 export default {
   name: 'EditTaskModal',
-  props: ['taskTitle', 'taskDescription', 'taskPoint', 'taskAssignee'],
+  props: ['task'],
+  data () {
+    return {
+      title: this.task.title,
+      description: this.task.description,
+      point: this.task.point,
+      assignee: this.task.assignee
+    }
+  },
   methods: {
     saveEditedTask () {
       this.$store.dispatch('saveEditedTask', {
-        title: this.taskTitle,
-        description: this.taskDescription,
-        point: this.taskPoint
+        title: this.title,
+        description: this.description,
+        point: this.point,
+        assignee: this.assignee,
+        status: this.task.status,
+        key: this.task['.key']
       })
     }
   }

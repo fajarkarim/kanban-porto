@@ -30,7 +30,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button @click="saveEditedTask" type="button" class="btn btn-primary btn-outline-success" data-dismiss="modal">Create</button>
+          <button @click="saveEditedTask" type="button" class="btn btn-primary btn-outline-success" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>

@@ -9,11 +9,11 @@
           </button>
         </div>
         <div class="modal-body">
-          Change status to {{ status[task.status] }} ?
+          Do you want to delete '{{ task.title }}' ?
         </div>
         <div class="modal-footer">
+          <button @click="removeTask()" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button @click="editStatus()" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
         </div>
       </div>
     </div>
@@ -29,8 +29,8 @@ export default {
     }
   },
   methods: {
-    editStatus (status) {
-      this.$store.dispatch('editStatus', this.task)
+    removeTask () {
+      this.$store.dispatch('removeTask', this.task)
     }
   }
 }

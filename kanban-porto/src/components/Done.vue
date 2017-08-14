@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="col-3">
+  <div class="col-md-3">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header bg-success">
         Done
       </div>
       <div class="card-block">
@@ -14,12 +14,12 @@
             <div class="row">
               <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'edit'">Edit</a>
               <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'details'">Details</a>
-              <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'auth'">Doing</a>
+              <a class="col" href="#" data-toggle="modal" :data-target="'#'+task['.key']+'delete'">Trash</a>
             </div>
           </div>
           <DetailTaskModal :id="task['.key']+'details'" :taskDescription="task.description" :taskTitle="task.title"/>
           <EditTaskModal :id="task['.key']+'edit'" :task="task"/>
-          <AuthModal :id="task['.key']+'auth'" :task="task"/>
+          <DeleteTaskModal :id="task['.key']+'delete'" :task="task"/>
         </div>
       </div>
     </div>
@@ -29,13 +29,13 @@
 <script>
 import DetailTaskModal from '@/components/DetailTaskModal'
 import EditTaskModal from '@/components/EditTaskModal'
-import AuthModal from '@/components/AuthModal'
+import DeleteTaskModal from '@/components/DeleteTaskModal'
 export default {
   name: 'Todo',
   components: {
     DetailTaskModal,
     EditTaskModal,
-    AuthModal
+    DeleteTaskModal
   },
   firebase () {
     return {

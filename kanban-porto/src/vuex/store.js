@@ -28,6 +28,9 @@ const store = new Vuex.Store({
     },
     editStatus ({ commit }, payload) {
       db.ref('kanban').child(`${payload['.key']}/status`).set(payload.status + 1)
+    },
+    removeTask ({ commit }, payload) {
+      db.ref('kanban').child(payload['.key']).remove()
     }
   }
 })
